@@ -1,0 +1,44 @@
+body {
+    font-family: "Garamond";
+    margin: 0;
+    color: rgba(56, 48, 48, 0.925);
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-down {
+    display: flex;
+    flex-direction: column;
+}
+
+#app-title {
+    text-align: center;
+}
+
+#header{
+    height: 20px;
+    width: 100%;
+    background-color: #EF3340;
+}
+
+#footer{
+    height: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #EF3340;
+}
+
+
+#slideshow{
+    margin-top: 2%;
+    background-color: rgba(0, 166, 81, .8);
+}

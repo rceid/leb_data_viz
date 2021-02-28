@@ -1,1 +1,3 @@
 static_project/data/wfp_foodprices.csv
+node_modules/
+.DS_store
