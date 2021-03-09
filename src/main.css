@@ -1,8 +1,13 @@
+
 body {
     font-family: "Garamond";
     margin: 0;
-    color: rgba(56, 48, 48, 0.925);
-    height: 100%;
+    color: rgba(41, 35, 35, 1);
+}
+
+#app{
+    background-color:rgb(165, 164, 164);
+    height:100%;
 }
 
 h1, h2, h3, h4, h5 {
@@ -20,25 +25,48 @@ h1, h2, h3, h4, h5 {
 }
 
 #app-title {
-    text-align: center;
+    align-items: center;
 }
 
 #header{
     height: 20px;
-    width: 100%;
-    background-color: #EF3340;
+    width: 100%; 
+    background-color: #0e7534; 
 }
 
-#footer{
-    height: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    background-color: #EF3340;
+#text{
+    background-color:#389eaa;
+    width: 35%;
+    min-width: 35%;
 }
 
+#chart{
+    width: 35%;
+}
 
 #slideshow{
     margin-top: 2%;
-    background-color: rgba(0, 166, 81, .8);
+    margin-bottom: 3%;
+}
+
+#contents {
+    justify-content: space-around;
+    margin-bottom: 5px;
+}
+
+#buttons{
+    justify-content: center;
+}
+
+#back {
+    margin-right: 15px;
+}
+
+#slide-content {
+    margin: 0 0 0 3px;
+}
+
+.prog-container{
+    justify-content: center;
+    margin-top:5px;
 }
