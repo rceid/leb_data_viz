@@ -24,6 +24,10 @@ date,rate,type
 9/15/2020,7532,unofficial
 10/15/2020,8025,unofficial
 11/15/2020,7800,unofficial
+12/15/2020,8400,unofficial
+1/15/2021,8800,unofficial
+2/15/2021,8900,unofficial
+3/15/2021,10000,unofficial
 11/15/2018,1507.5,official
 12/15/2018,1507.5,official
 1/15/2019,1507.5,official
@@ -49,3 +53,7 @@ date,rate,type
 9/15/2020,1507.5,official
 10/15/2020,1507.5,official
 11/15/2020,1507.5,official
+12/15/2020,1507.5,official
+1/15/2021,1507.5,official
+2/15/2021,1507.5,official
+3/15/2021,1507.5,official
