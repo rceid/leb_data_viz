@@ -2,85 +2,73 @@ import './main.css';
 import vegaEmbed from 'vega-embed';
 import {select} from 'd3-selection';
 import DumbBell from './charts/dumbbell.js';
+import BeeSwarmRegion from './charts/beeswarmRegions.js'
+import BeeSwarmCountry from './charts/beeswarmCountries.js'
+import {csv} from 'd3-fetch';
 
 
-vegaEmbed('#chart', DumbBell, {actions: false})
 
-// fetch('./data/cars.json')
-//   .then(x => x.json())
-//   .then(main);
+csv("./../data/fx_rate.csv").then(main)
 
-// function renderVegaChart(chart) {
-//   vegaEmbed('#slide-content', chart, {actions: false, theme: 'excel'});
-// }
+const mySlides = [
+    {title:"First slide",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "+
+    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. "+ 
+    "Nam eu orci purus. Praesent placerat laoreet diam id lobortis. "+ 
+    "Aenean interdum, purus ornare pulvinar tincidunt, quam lectus "+
+    "hendrerit tortor, mollis ultricies dui justo sit amet massa.", 
+    render: (data) => {
+        vegaEmbed('#chart', DumbBell, {actions: false})
+    }},
+    {title:"Second slide",
+    content: "Praesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
+    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
+    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
+    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
+    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
+    "at vehicula erat consectetur mattis.",
+    render: (data) => {
+        vegaEmbed('#chart', BeeSwarmRegion, {actions: false})
+    }},
+    {title:"Third slide",
+    content: "Praesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
+    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
+    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
+    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
+    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
+    "at vehicula erat consectetur mattis.",
+    render: (data) => {
+        vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
+    }},
+];
 
-// const slides = [
-//   {
-//     title: 'Slide -1: pie state 1',
-//     content:
-//       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-//     render: data => PieChart(data, 'Horsepower'),
-//   },
-//   {
-//     title: 'Slide 0: pie state 2',
-//     content:
-//       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-//     render: data => PieChart(data, 'Cylinders'),
-//   },
 
-//   {
-//     title: 'Example Slide the first',
-//     content:
-//       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-//     render: () => renderVegaChart(BarChart),
-//   },
-//   {
-//     title: 'Why do we use it?',
-//     content: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`,
-//     render: () => renderVegaChart(Streamgraph),
-//   },
-// ];
+function main (data){
+    //works with state
+    let slideIdx = 0;
+    const slideTitle = select("#text h2");
+    const slideContent = select("#text p");
+    const updateState = newIdx => {
+        slideIdx = newIdx;
+        renderSlide();
+    }
+    let progressBar = document.body.querySelector("#p-bar")
+    
+    select("#buttons #back").on('click', () =>
+        updateState(slideIdx ? slideIdx - 1 : slideIdx),
+    );
+    
+    select("#buttons #next").on('click', () =>
+        updateState(slideIdx === mySlides.length - 1 ? slideIdx : slideIdx + 1),);
 
-// function main(data) {
-//   // state
-//   let currentSlideIdx = 0;
-//   const updateState = newIdx => {
-//     currentSlideIdx = newIdx;
-//     renderSlide();
-//     drawProgress();
-//   };
-
-//   // configuration stuff
-//   const header = select('#slide-detail h1');
-//   const body = select('#slide-detail p');
-
-//   select('#prev').on('click', () =>
-//     updateState(currentSlideIdx ? currentSlideIdx - 1 : slides.length - 1),
-//   );
-//   select('#next').on('click', () =>
-//     updateState((currentSlideIdx + 1) % slides.length),
-//   );
-
-//   function drawProgress() {
-//     const numData = [...new Array(slides.length)].map((_, idx) => idx);
-//     select('#progress')
-//       .selectAll('.progress-dot')
-//       .data(numData)
-//       .join('div')
-//       .classed('progress-dot', true)
-//       .classed('current-dot', idx => idx === currentSlideIdx)
-//       .style('background-color', idx =>
-//         currentSlideIdx < idx ? 'gray' : 'black',
-//       );
-//   }
-
-//   // "draw loop"
-//   function renderSlide() {
-//     const currentSlide = slides[currentSlideIdx];
-//     header.text(currentSlide.title);
-//     body.text(currentSlide.content);
-//     currentSlide.render(data);
-//   }
-//   renderSlide();
-//   drawProgress();
-// }
+    function renderSlide() {
+        progressBar.value = ((slideIdx + 1)/ mySlides.length) * 100
+        const currentSlide = mySlides[slideIdx];
+        currentSlide.render(data);
+        slideTitle.text(currentSlide.title);
+        slideContent.text(currentSlide.content);
+    }
+    renderSlide();
+}
