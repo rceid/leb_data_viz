@@ -7,22 +7,30 @@
   </head>
   <body>
     <div id="app" class="flex-down">
-      <div id='header'>
-      </div>
+      <div id='header'></div>
       <div id='app-title' class='flex-down'>
         <h1>Food Insecurity in Lebanon</h1>
         <h3>How did we get here?</h3>
       </div>
-      <div id='slideshow' class='flex'>
-        <div>This div is here to show that the flex display lines the chart up next to this</div>
-        <div>
-          <div id="chart">
-          </div>
+      <div id='slideshow' class='flex-down'>
+        <div id='contents' class='flex'>
+        <div id='text'>
+          <h2>Slide title</h2>
+          <p id="slide-content">slide content</p>
+        </div>
+        <div id="chart"></div>
+      </div>
+        <div class="flex" id='buttons'>
+          <button id="back">Back</button>
+          <button id="next">Next</button>
+        </div>
+        <div class='flex prog-container'>
+          <progress id='p-bar' max="100" value="0"></progress>
         </div>
       </div>
-      <div><h1>Data sources:</h1></div>
-      <footer id='footer'></footer>
     </div>
+      </div>
+    </div>
+    <script src="bundle.js"></script>
   </body>
-  <script src="bundle.js"></script>
 </html>
