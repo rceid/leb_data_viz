@@ -5,12 +5,45 @@ import DumbBell from './charts/dumbbell.js';
 import BeeSwarmRegion from './charts/beeswarmRegions.js'
 import BeeSwarmCountry from './charts/beeswarmCountries.js'
 import {csv} from 'd3-fetch';
+import lineChart from './charts/lineCurrency.js'
 
 
 
 csv("./../data/fx_rate.csv").then(main)
 
 const mySlides = [
+    {title:"The October Revolution",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "+
+    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. ",
+    render: (data) => {
+        let cutoffDate  = new Date("10/15/2019")
+        let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
+        lineChart(filteredData)
+    }},
+    {title:"First Covid-19 Lockdown",
+    content: "We we're doing so well :(. "+
+    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. ",
+    render: (data) => {
+        let cutoffDate  = new Date("3/15/2020")
+        let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
+        lineChart(filteredData)
+    }},
+    {title:"Beirut Port Explosion",
+    content: "Never forget. "+
+    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. ",
+    render: (data) => {
+        let cutoffDate  = new Date("08/15/2020")
+        let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
+        lineChart(filteredData)
+    }},
+    {title:"Today - an all-time high",
+    content: "Never forget. "+
+    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. ",
+    render: (data) => {
+        let cutoffDate  = new Date("03/15/2021")
+        let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
+        lineChart(filteredData)
+    }},
     {title:"First slide",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "+
     "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. "+ 
@@ -46,7 +79,7 @@ const mySlides = [
 
 
 function main (data){
-    //works with state
+    
     let slideIdx = 0;
     const slideTitle = select("#text h2");
     const slideContent = select("#text p");

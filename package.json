@@ -28,6 +28,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "d3-axis": "^2.0.0",
     "d3-fetch": "^2.0.0",
     "d3-scale": "^3.2.3",
     "d3-scale-chromatic": "^2.0.0",
