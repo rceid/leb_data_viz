@@ -3,6 +3,7 @@ import {line} from 'd3-shape';
 import {select} from 'd3-selection';
 import {axisBottom, axisLeft} from 'd3-axis';
 import {transition} from 'd3-transition';
+import { interpolatePath } from 'd3-interpolate-path';
 
 const height = 300;
 const width = 300;
@@ -49,9 +50,9 @@ export default function(data) {
       .domain([0, 10000])
       .range([height, 0]);
 
-//    svg.append("g")
-//      .attr("class", "y-axis")
- //     .call(axisLeft(y))
+   svg.append("g")
+     .attr("class", "y-axis")
+     .call(axisLeft(y))
     
     const firstLineScale = line()
       .x(d => x(new Date(d.date)))
@@ -61,58 +62,26 @@ export default function(data) {
       .x(d => x(new Date(d.date)))
       .y(d => y(d['unofficial']));
 
-      const scales = [firstLineScale, secondLineScale]
-      const colors = ["#389eaa", "#0e7534"]
-      const t = transition().duration(3000);
+    const scales = [firstLineScale, secondLineScale]
+    const colors = ["#389eaa", "#0e7534"]
+    const t = transition().duration(2000);
+
     svg.selectAll(".line")
-      .data([data, data], (d, i) => {
-        console.log(d, i)
-        return `${i}`})
+      .data([data, data])
       .join(
-        enter => enter.append('path').attr("d", (d, i) => {
-          console.log('bad hello', i, d)
-         return  scales[i](d)
-        }), 
+        enter => enter.append('path').attr("d", (d, i) => scales[i](d)), 
          update => update.call(elem => 
-           elem.transition().duration(3000).attr("d", (d, i) => {
-             console.log('hi', i, d)
-            return  scales[i](d)})
-         )
+           elem.transition(t).attrTween("d", function(d, i) {
+            let previous = select(this).attr("d");
+            let current = scales[i](d);
+            return interpolatePath(previous, current)
+           })
+        )
       )
       .attr('class', 'line')
       .style("stroke", (_, i) => colors[i])
       .attr('stroke-width', 4)
       .attr('fill','none')
-      
-
-    // svg.selectAll(".line-chart")
-    //   .data([data])
-    //   .join(
-    //     enter => enter.append('path').attr("d", secondLineScale), 
-    //     update => update.call(elem => 
-    //       elem.transition(transition().duration(300)).attr("d", secondLineScale))
-    //     )
-    //   .attr('class', 'unofficial-rate')
-    //   .style("stroke", "#0e7534")
-    //   .attr('stroke-width', 4)
-    //   .attr('fill','none')
-
-//copies without join
-    // svg.selectAll("path")
-    //   .data([data])
-    //   .attr('class', 'official-rate')
-    //   .style("stroke", "#389eaa")
-    //   .attr('stroke-width', 4)
-    //   .attr('fill','none')
-    //   .attr("d", firstLineScale)
-
-    // svg.append("path")
-    //   .data([data])
-    //   .attr('class', 'unofficial-rate')
-    //   .style("stroke", "#0e7534")
-    //   .attr('stroke-width', 4)
-    //   .attr('fill','none')
-    //   .attr("d", secondLineScale)
 
     Array(["20", "30", "#389eaa"], ["20", "45", "#0e7534"]).map((val, idx) => {
       svg.append("rect")
@@ -135,5 +104,4 @@ export default function(data) {
         .attr("font-weight", val[4])
         .attr("class", 'annotation')
       })
-
     };
