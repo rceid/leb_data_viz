@@ -33,7 +33,7 @@ export default {
       }
     ],
     "data": {"name": "data-63f295ba10c208cb7d27825b35af9887"},
-    "height": 300,
+    "height": 317,
     "title": {
       "text": ["Change in Commodity Prices"],
       "fontSize": 20,

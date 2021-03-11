@@ -37,7 +37,7 @@ const mySlides = [
         lineChart(filteredData)
     }},
     {title:"Today - an all-time high",
-    content: "Never forget. "+
+    content: "A living hell. "+
     "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. ",
     render: (data) => {
         let cutoffDate  = new Date("03/15/2021")

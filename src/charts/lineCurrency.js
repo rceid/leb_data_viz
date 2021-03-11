@@ -1,8 +1,8 @@
-import {csv} from 'd3-fetch';
 import {scaleLinear, scaleTime} from 'd3-scale';
 import {line} from 'd3-shape';
 import {select} from 'd3-selection';
 import {axisBottom, axisLeft} from 'd3-axis';
+import {transition} from 'd3-transition';
 
 const height = 300;
 const width = 300;
@@ -10,6 +10,7 @@ const margin = {left: 50, top: 50, bottom: 50, right: 50};
 
 export default function(data) {
     if (select('svg .line-chart').empty()){
+      console.log('remove ing stuff')
         select("#chart").remove();
         select("#contents")
         .append('div')
@@ -20,31 +21,37 @@ export default function(data) {
         .append('g')
         .attr('class', 'line-chart')
         .attr("transform", "translate("+margin.left+"," + margin.top + ")");
+        //
+
+        select("svg .line-chart").append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x-axis")
     }
     
     let svg = select("svg .line-chart")
-    svg.select(".official-rate").remove()
-    svg.select(".unofficial-rate").remove()
-    svg.select(".x-axis").remove()
-    svg.select(".y-axis").remove()
+//    svg.select(".official-rate").remove()
+ ////   svg.select(".unofficial-rate").remove()
+ //   svg.select(".x-axis").remove()
+//    svg.select(".y-axis").remove()
+//    svg.selectAll(".annotation").remove()
+  //  svg.select(".annotation").remove()
+  //  svg.select(".annotation").remove()
+  //  svg.select(".annotation").remove()
 
     let x = scaleTime()
-      //.domain(extent(data, d => new Date(d.date))) 
       .domain([new Date("11/15/2018") , new Date("3/15/2021") ]) 
       .range([0, width])
 
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x-axis")
+      select(".line-chart .x-axis")
         .call(axisBottom(x).ticks(11));
 
     let y = scaleLinear()
       .domain([0, 10000])
       .range([height, 0]);
 
-    svg.append("g")
-      .attr("class", "y-axis")
-      .call(axisLeft(y))
+//    svg.append("g")
+//      .attr("class", "y-axis")
+ //     .call(axisLeft(y))
     
     const firstLineScale = line()
       .x(d => x(new Date(d.date)))
@@ -54,30 +61,79 @@ export default function(data) {
       .x(d => x(new Date(d.date)))
       .y(d => y(d['unofficial']));
 
-    svg.append("path")
-      .data([data])
-      .attr('class', 'official-rate')
-      .style("stroke", "#389eaa")
+      const scales = [firstLineScale, secondLineScale]
+      const colors = ["#389eaa", "#0e7534"]
+      const t = transition().duration(3000);
+    svg.selectAll(".line")
+      .data([data, data], (d, i) => {
+        console.log(d, i)
+        return `${i}`})
+      .join(
+        enter => enter.append('path').attr("d", (d, i) => {
+          console.log('bad hello', i, d)
+         return  scales[i](d)
+        }), 
+         update => update.call(elem => 
+           elem.transition().duration(3000).attr("d", (d, i) => {
+             console.log('hi', i, d)
+            return  scales[i](d)})
+         )
+      )
+      .attr('class', 'line')
+      .style("stroke", (_, i) => colors[i])
       .attr('stroke-width', 4)
       .attr('fill','none')
-      .attr("d", firstLineScale)
+      
 
-    svg.append("path")
-      .data([data])
-      .attr('class', 'unofficial-rate')
-      .style("stroke", "#0e7534")
-      .attr('stroke-width', 4)
-      .attr('fill','none')
-      .attr("d", secondLineScale)
+    // svg.selectAll(".line-chart")
+    //   .data([data])
+    //   .join(
+    //     enter => enter.append('path').attr("d", secondLineScale), 
+    //     update => update.call(elem => 
+    //       elem.transition(transition().duration(300)).attr("d", secondLineScale))
+    //     )
+    //   .attr('class', 'unofficial-rate')
+    //   .style("stroke", "#0e7534")
+    //   .attr('stroke-width', 4)
+    //   .attr('fill','none')
 
-    // svg.selectAll(".unoff-dots")
-    //   .data(data)
-    //   .join('circle')
-    //   .attr('class', 'unoff-dots')
-    //   .attr('cx', d=> x(new Date(d.date)))
-    //   .attr('cy', d=> y(d.unofficial))
-    //   .attr('r', 3)
-    //   .attr('stroke', 'white')
-    //   .attr('fill', 'black')
+//copies without join
+    // svg.selectAll("path")
+    //   .data([data])
+    //   .attr('class', 'official-rate')
+    //   .style("stroke", "#389eaa")
+    //   .attr('stroke-width', 4)
+    //   .attr('fill','none')
+    //   .attr("d", firstLineScale)
+
+    // svg.append("path")
+    //   .data([data])
+    //   .attr('class', 'unofficial-rate')
+    //   .style("stroke", "#0e7534")
+    //   .attr('stroke-width', 4)
+    //   .attr('fill','none')
+    //   .attr("d", secondLineScale)
+
+    Array(["20", "30", "#389eaa"], ["20", "45", "#0e7534"]).map((val, idx) => {
+      svg.append("rect")
+      .attr("height", 5)
+      .attr("width", 15)
+      .attr("x", val[0])
+      .attr("y", val[1])
+      .attr("fill", val[2])
+    });
+
+    Array(['20', '-25', 'Dollar-Lira Foreign Exchange Rate', 'large', 'bold'], 
+      ['80', '-10', "November 2018 - Present", "small", ""],
+      ['39', '35', "Official Rate", 'small', ''],
+      ['39', '50', 'Unofficial Rate', 'small', '']).map((val, _) => {
+        svg.append("text")
+        .attr("x", val[0])
+        .attr("y", val[1])
+        .text(val[2])
+        .attr("font-size", val[3])
+        .attr("font-weight", val[4])
+        .attr("class", 'annotation')
+      })
 
     };
