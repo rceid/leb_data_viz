@@ -30,7 +30,6 @@ export default {
       "tooltip": [
         {"type": "quantitative", "field": "Percent Change"},
         {"type": "nominal", "field": "Commodity"},
-        {"type": "nominal", "field": "Country"}
       ],
       "x": {
         "type": "quantitative",

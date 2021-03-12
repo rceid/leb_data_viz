@@ -34,7 +34,7 @@ export default function(data) {
       .range([0, width])
 
       select(".line-chart .x-axis")
-        .call(axisBottom(x).ticks(11));
+        .call(axisBottom(x));
 
     let y = scaleLinear()
       .domain([0, 10000])

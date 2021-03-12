@@ -54,8 +54,8 @@ const mySlides = [
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
         lineChart(filteredData)
     }},
-    {title:"First slide",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "+
+    {title:"Price Comparison 2018-2020",
+    content: "\nLorem ipsum dolor sit amet, consectetur adipiscing elit. "+
     "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. "+ 
     "Nam eu orci purus. Praesent placerat laoreet diam id lobortis. "+ 
     "Aenean interdum, purus ornare pulvinar tincidunt, quam lectus "+
@@ -63,8 +63,8 @@ const mySlides = [
     render: (data) => {
         vegaEmbed('#chart', DumbBell, {actions: false})
     }},
-    {title:"Second slide",
-    content: "Praesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    {title:"Regional Price Changes 2020",
+    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
     "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
     "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
     "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
@@ -75,8 +75,8 @@ const mySlides = [
         //let leg = select("#legend").append("rect").attr("x", "20").attr('y', "20").attr('fill', 'steelblue').append('text').attr('x', '25').attr('y', '20').text('rectangle')
         vegaEmbed('#chart', BeeSwarmRegion, {actions: false, renderer:'svg'})
     }},
-    {title:"Third slide",
-    content: "Praesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    {title:"MENA Region Price Changes 2020",
+    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
     "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
     "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
     "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
