@@ -9,7 +9,10 @@ export default {
     "color": {
       "type": "nominal",
       "field": "Region",
-      "legend": null,
+      "legend": {
+        'orient':'bottom',
+        'columns':2
+      },
       "scale": {"scheme": "category10"}
     },
     "column": {
@@ -24,8 +27,7 @@ export default {
     },
     "tooltip": [
       {"type": "quantitative", "field": "Percent Change"},
-      {"type": "nominal", "field": "Commodity"},
-      {"type": "nominal", "field": "Region"}
+      {"type": "nominal", "field": "Commodity"}
     ],
     "x": {
       "type": "quantitative",
@@ -41,6 +43,11 @@ export default {
     }
   },
   "height": 250,
+  "title": {
+    "text": ["Regional Change in Commodity Prices, 2020"],
+    "fontSize": 15,
+    "anchor": "right"
+  },
   "transform": [
     {"calculate": "sqrt(-2*log(random()))*cos(2*PI*random())", "as": "jitter"}
   ],

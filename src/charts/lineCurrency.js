@@ -6,12 +6,11 @@ import {transition} from 'd3-transition';
 import { interpolatePath } from 'd3-interpolate-path';
 
 const height = 300;
-const width = 300;
+const width = 350;
 const margin = {left: 50, top: 50, bottom: 50, right: 50};
 
 export default function(data) {
     if (select('svg .line-chart').empty()){
-      console.log('remove ing stuff')
         select("#chart").remove();
         select("#contents")
         .append('div')
@@ -22,7 +21,6 @@ export default function(data) {
         .append('g')
         .attr('class', 'line-chart')
         .attr("transform", "translate("+margin.left+"," + margin.top + ")");
-        //
 
         select("svg .line-chart").append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -30,14 +28,6 @@ export default function(data) {
     }
     
     let svg = select("svg .line-chart")
-//    svg.select(".official-rate").remove()
- ////   svg.select(".unofficial-rate").remove()
- //   svg.select(".x-axis").remove()
-//    svg.select(".y-axis").remove()
-//    svg.selectAll(".annotation").remove()
-  //  svg.select(".annotation").remove()
-  //  svg.select(".annotation").remove()
-  //  svg.select(".annotation").remove()
 
     let x = scaleTime()
       .domain([new Date("11/15/2018") , new Date("3/15/2021") ]) 
@@ -83,7 +73,7 @@ export default function(data) {
       .attr('stroke-width', 4)
       .attr('fill','none')
 
-    Array(["20", "30", "#389eaa"], ["20", "45", "#0e7534"]).map((val, idx) => {
+    Array(["20", "45", "#389eaa"], ["20", "30", "#0e7534"]).map((val, idx) => {
       svg.append("rect")
       .attr("height", 5)
       .attr("width", 15)
@@ -94,8 +84,8 @@ export default function(data) {
 
     Array(['20', '-25', 'Dollar-Lira Foreign Exchange Rate', 'large', 'bold'], 
       ['80', '-10', "November 2018 - Present", "small", ""],
-      ['39', '35', "Official Rate", 'small', ''],
-      ['39', '50', 'Unofficial Rate', 'small', '']).map((val, _) => {
+      ['39', '50', "Official Rate", 'small', ''],
+      ['39', '35', 'Unofficial Rate', 'small', '']).map((val, _) => {
         svg.append("text")
         .attr("x", val[0])
         .attr("y", val[1])

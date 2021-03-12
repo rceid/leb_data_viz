@@ -9,7 +9,10 @@ export default {
       "color": {
         "type": "nominal",
         "field": "Country",
-        "legend": null,
+        "legend": {
+          'orient':'bottom',
+          'columns':2
+        },
         "scale": {"scheme": "category10"}
       },
       "column": {
@@ -19,7 +22,8 @@ export default {
           "labelFontSize": 0,
           "labelOrient": "bottom",
           "titleFontSize": 0,
-          "titleOrient": "top"
+          "titleOrient": "top",
+          "labelPadding":3
         },
         "title": ""
       },
@@ -38,6 +42,12 @@ export default {
       "y": {"type": "quantitative", "field": "Percent Change"}
     },
     "height": 250,
+    "title": {
+      "text": ['Change in Commodity Prices, MENA Region, 2020'],
+      "fontSize": 15,
+      "anchor": "right",
+      'offset':15
+    },
     "transform": [
       {"calculate": "sqrt(-2*log(random()))*cos(2*PI*random())", "as": "jitter"}
     ],
