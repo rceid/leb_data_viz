@@ -1,10 +1,12 @@
 import './main.css';
+import {csv} from 'd3-fetch';
 import vegaEmbed from 'vega-embed';
 import {select} from 'd3-selection';
 import DumbBell from './charts/dumbbell.js';
 import BeeSwarmRegion from './charts/beeswarmRegions.js'
 import BeeSwarmCountry from './charts/beeswarmCountries.js'
-import {csv} from 'd3-fetch';
+import areaChartUSD from './charts/areaChartUSD.js'
+import areaChartLollar from './charts/areaChartLollar.js'
 import lineChart from './charts/lineCurrency.js'
 
 
@@ -85,6 +87,28 @@ const mySlides = [
     "at vehicula erat consectetur mattis.",
     render: (data) => {
         vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
+    }},
+    {title:"Basket of Household Goods",
+    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
+    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
+    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
+    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
+    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
+    "at vehicula erat consectetur mattis.",
+    render: (data) => {
+        vegaEmbed('#chart', areaChartUSD, {actions: false})
+    }},
+    {title:"Same Basket in Lollar",
+    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
+    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
+    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
+    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
+    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
+    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
+    "at vehicula erat consectetur mattis.",
+    render: (data) => {
+        vegaEmbed('#chart', areaChartLollar, {actions: false})
     }},
 ];
 
