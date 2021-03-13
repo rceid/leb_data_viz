@@ -18,16 +18,18 @@ export default function(data) {
         .append("svg")
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
+        .attr("id", 'js-chart')
         .append('g')
         .attr('class', 'line-chart')
         .attr("transform", "translate("+margin.left+"," + margin.top + ")");
-
         select("svg .line-chart").append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x-axis")
+        
     }
     
     let svg = select("svg .line-chart")
+    
 
     let x = scaleTime()
       .domain([new Date("11/15/2018") , new Date("3/15/2021") ]) 
