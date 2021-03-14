@@ -22,9 +22,37 @@ export default function(data) {
         .append('g')
         .attr('class', 'line-chart')
         .attr("transform", "translate("+margin.left+"," + margin.top + ")");
+        //add x-axis once
         select("svg .line-chart").append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x-axis")
+        // add y-axis once
+        select("svg .line-chart").append("g")
+        .attr("class", "y-axis")
+        // add legend once
+        Array(["20", "45", "#389eaa"], ["20", "30", "#0e7534"]).map((val, idx) => {
+          select("svg .line-chart")
+          .append("rect")
+          .attr("height", 5)
+          .attr("width", 15)
+          .attr("x", val[0])
+          .attr("y", val[1])
+          .attr("fill", val[2])
+        });
+    
+        Array(['20', '-25', 'Dollar-Lira Foreign Exchange Rate', 'large', 'bold'], 
+          ['80', '-10', "November 2018 - Present", "small", ""],
+          ['39', '50', "Official Rate", 'small', ''],
+          ['39', '35', 'Unofficial Rate', 'small', '']).map((val, _) => {
+            select("svg .line-chart")
+            .append("text")
+            .attr("x", val[0])
+            .attr("y", val[1])
+            .text(val[2])
+            .attr("font-size", val[3])
+            .attr("font-weight", val[4])
+            .attr("class", 'annotation')
+          })
         
     }
     
@@ -42,8 +70,7 @@ export default function(data) {
       .domain([0, 10000])
       .range([height, 0]);
 
-   svg.append("g")
-     .attr("class", "y-axis")
+    select(".line-chart .y-axis")
      .call(axisLeft(y))
     
     const firstLineScale = line()
@@ -74,26 +101,4 @@ export default function(data) {
       .style("stroke", (_, i) => colors[i])
       .attr('stroke-width', 4)
       .attr('fill','none')
-
-    Array(["20", "45", "#389eaa"], ["20", "30", "#0e7534"]).map((val, idx) => {
-      svg.append("rect")
-      .attr("height", 5)
-      .attr("width", 15)
-      .attr("x", val[0])
-      .attr("y", val[1])
-      .attr("fill", val[2])
-    });
-
-    Array(['20', '-25', 'Dollar-Lira Foreign Exchange Rate', 'large', 'bold'], 
-      ['80', '-10', "November 2018 - Present", "small", ""],
-      ['39', '50', "Official Rate", 'small', ''],
-      ['39', '35', 'Unofficial Rate', 'small', '']).map((val, _) => {
-        svg.append("text")
-        .attr("x", val[0])
-        .attr("y", val[1])
-        .text(val[2])
-        .attr("font-size", val[3])
-        .attr("font-weight", val[4])
-        .attr("class", 'annotation')
-      })
     };
