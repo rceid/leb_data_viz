@@ -10,7 +10,7 @@ import areaChartLollar from './charts/areaChartLollar.js'
 import lineChart from './charts/lineCurrency.js'
 
 
-csv("/data/fx_rate.csv").then(main)
+csv("./data/fx_rate.csv").then(main)
 
 const mySlides = [
     {title:"Devaluation of the Lebanese Lira",
