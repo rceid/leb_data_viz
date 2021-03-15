@@ -13,6 +13,24 @@ import lineChart from './charts/lineCurrency.js'
 csv("./data/fx_rate.csv").then(main)
 
 const mySlides = [
+    {title:"Intro",
+    content:"\nIn this slideshow I will be exploring Lebanese economic crisis and the food insecurity situation that has come about in its wake "+
+    "using various modern data visualizations. \nI created this project using Javascript's d3 library as well and Vega powered by Altair for my masters "+
+    "course Data Visualization for Policy Analysis at the University of Chicago. \n\n\nMy motivation for undertaking this project was both the sense of "+
+    "urgency and powerlessness to make a difference in a country I hold dear. I hope to leverage my 'data skills' to tell untold stories of people affected" +
+    " by conflict and crises and give them a voice.",
+    render: () => {
+        if (!select("#chart svg").empty()){
+            select("#chart svg").remove()
+           }
+        if (select("#chart img").empty()){
+        select("#chart")
+        .append("img")
+        .attr("src", "./data/images/charts_intro.png")
+        .attr('width', '80%')
+        .attr('height', 'auto')
+        }
+    }},
     {title:"Devaluation of the Lebanese Lira",
     content: "\nThe crux of the current economic crisis lies with the Lebanese currency's loss of value."+
     "\nWhile it has been pegged to the dollar at ~1500 Lira since 1997, a black market exchange rate began emerging mid-2019, where our line chart has stopped."  +
@@ -57,59 +75,81 @@ const mySlides = [
         lineChart(filteredData)
     }},
     {title:"Price Comparison 2018-2020",
-    content: "\nLorem ipsum dolor sit amet, consectetur adipiscing elit. "+
-    "Donec purus purus, lobortis non massa eu, malesuada suscipit erat. "+ 
-    "Nam eu orci purus. Praesent placerat laoreet diam id lobortis. "+ 
-    "Aenean interdum, purus ornare pulvinar tincidunt, quam lectus "+
-    "hendrerit tortor, mollis ultricies dui justo sit amet massa.", 
-    render: (data) => {
+    content: "\nNot only has the currency lost around 85% of its value since end-2018, "+
+    "but prices have increased, notably the prices of food and everyday good, as we see in the dumbell chart."+ 
+    " \nSome commodities such as fuel and bread are subsidized by the government and have "+
+    "experienced minimal impact. Most commodities have skyrocketed in price, such as sunflower oil (and all cooking oils), "+ 
+    "increasing 450%.  It is increasingly expensive for the people of Lebanon to feed themselves, " +
+    "and price inflation is a serious concern. \nGiven the food insecurity felt by a sizeable portion " +
+    "of the population, many lower-income families have decreased their overall food consumption. " + 
+    "Middle income families have adapted by removing chicken and meat from their diets and opting for " +
+    " less expensive, locally-grown foods.", 
+    render: () => {
         vegaEmbed('#chart', DumbBell, {actions: false})
     }},
-    {title:"Regional Price Changes 2020",
-    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
-    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
-    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
-    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
-    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
-    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
-    "at vehicula erat consectetur mattis.",
-    render: (data) => {
-        //let leg = select("#legend").append("rect").attr("x", "20").attr('y', "20").attr('fill', 'steelblue').append('text').attr('x', '25').attr('y', '20').text('rectangle')
+    {title:"Commodity Price Changes in 2020 by Region",
+    content: "\nThe interactive Bee Swarm plots show commodities and their " +
+    "price change (in percent) from beginning to end of 2020. \nEach region of " +
+    " the world is comprised of World Food Programme beneficiary countries for which commodity prices are"+
+    " available and recorded. Each dot is the average price change of the good among the region's countries. " + 
+    "\nThe Middle East and North Africa region does stand out as a volatile region for prices compared to the other five." +
+    "We will explore in the next slide how Lebanon fits into the regional picture.",
+    render: () => {
         vegaEmbed('#chart', BeeSwarmRegion, {actions: false, renderer:'svg'})
     }},
-    {title:"MENA Region Price Changes 2020",
-    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
-    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
-    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
-    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
-    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
-    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
-    "at vehicula erat consectetur mattis.",
-    render: (data) => {
+    {title:"2020 Price Changes in the MENA Region",
+    content: "\nThis interactive Bee Swarm shows prices changes for WFP participating " +
+    "countries in the Middle East and North Africa region. Lebanon certainly is one " +
+    "of the countries that stands out in price volatility, second only to Syria. This "+
+    "tell us that Lebanon isn't a victim of some greater regional instability; it is an "+
+    "an outlier and one of the drivers of the regional price volatility seen in the previous slide. "+
+    " \nLebanon must take action to prevent the onset of an even worse food crisis. Many citizens "+
+    "have taken matters into their own hands and begun growing and purchasing local food, as the "+
+    "devalued Lira will not go far in purchasing imported goods. \nA meaningful shift to local consumption" +
+    " will be a radical step for this country that imports food, and many other commodities, on a massive scale. ",
+    render: () => {
         vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
     }},
     {title:"Basket of Household Goods",
-    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
-    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
-    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
-    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
-    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
-    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
-    "at vehicula erat consectetur mattis.",
-    render: (data) => {
+    content: "\nNow we take a look at the price of a normal basket of goods with this area chart. "+
+    "Without taking into account the devaluation of the Lira, we see that this basket has more than doubled. "+
+    "in price between November 2018 and November 2020. \nA trip to the grocery store that once cost $40 now costs "+
+    "almost $90. \nAs previously mentioned, Lebanese people may adjust their habits, consuming less or substituting "+
+    "goods, but this financial pressure has fundamentally altered everyday life and many feel powerless to do anything "+
+    "about it.",
+    render: () => {
         vegaEmbed('#chart', areaChartUSD, {actions: false})
     }},
-    {title:"Same Basket in Lollar",
-    content: "\nPraesent eu tincidunt nibh. Aenean semper, augue at lobortis "+
-    "posuere, erat ante tempus tellus, sed accumsan nisi lectus ut magna. "+
-    "In hac habitasse platea dictumst. Aliquam cursus orci sed elit dignissim "+
-    "euismod. Praesent aliquam commodo dui, nec tempor mi ullamcorper et. "+
-    "Sed nec urna velit. Morbi scelerisque vestibulum lobortis. Curabitur "+
-    "pharetra sed est non scelerisque. Pellentesque blandit egestas lectus, "+
-    "at vehicula erat consectetur mattis.",
-    render: (data) => {
+    {title:"Real Prices for Basket of Goods",
+    content: "\nThis chart shows the real prices of the same commodities, in the place of nominal prices in the previous slide's chart."+
+    " This chart captures the real financial pressure that the average Lebanese person paid wages in the constantly devaluing Lira is currently"+
+    " facing. \nThe red line represents the highest price that the basket attained in nominal price on the previous slide. Prices are "+
+    "crushingly high, yet people need to eat. Families are faced with impossible decisions of whether to save their money or purchase a little more lentils, "+
+    "or rice, or bread.",
+    render: () => {
         vegaEmbed('#chart', areaChartLollar, {actions: false})
     }},
+    {title:"Last Slide",
+    content:"\nMany fear that Lebanon is headed for collapse, and the economic crisis will be the primary driver leading it into the depths of despair. Many "+ 
+    "had hope that the October Revolution (pictured on the right) would bring about meaningful change in a country plagued by a corrupt political elite in power for many decades and " +
+    "only able to deliver to their constituents via clientelism based on religious confession. \nFollowing the resignation of the government and the failure of all subsequent "+
+    "iterations to deliver on promises of reform many question if change is possible. With the arrival of the Covid-19 pandemic and the ensuing public health and economic damage," + 
+    " and the disastrous Beirut Port explosion, Lebanon is facing its worst crisis as a country since the civil war of 1975-1990. ",
+    render: () => {
+        if (!select("#chart canvas").empty()){
+        select("#chart canvas").remove()
+        select("#chart form").remove()
+        select("#chart")
+        .append("img")
+        .attr("src", "https://www.wilpf.org/wp-content/uploads/2019/12/1-Nabil_Ismail_Photography-1536x949.jpg")
+        .attr('width', '100%')
+        .attr('height', 'auto')
+        select('#chart')
+        .append('p')
+        .text('source: Nabil Ismaili, https://www.wilpf.org')
+        .attr('id', 'source')
+        }
+}}
 ];
 
 function main (data){

@@ -53,6 +53,11 @@ h1, h2, h3, h4, h5 {
     background-color: white;
 }
 
+#source {
+    font-size: x-small;
+    margin: 0;
+}
+
 #slideshow{
     margin-top: 2%;
     margin-bottom: 3%;
