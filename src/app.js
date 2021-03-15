@@ -15,10 +15,8 @@ csv("./data/fx_rate.csv").then(main)
 const mySlides = [
     {title:"Intro",
     content:"\nIn this slideshow I will be exploring Lebanese economic crisis and the food insecurity situation that has come about in its wake "+
-    "using various modern data visualizations. \nI created this project using Javascript's d3 library as well and Vega powered by Altair for my masters "+
-    "course Data Visualization for Policy Analysis at the University of Chicago. \n\n\nMy motivation for undertaking this project was both the sense of "+
-    "urgency and powerlessness to make a difference in a country I hold dear. I hope to leverage my 'data skills' to tell untold stories of people affected" +
-    " by conflict and crises and give them a voice.",
+    "using various modern data visualizations. \n\nI created this project using Javascript's d3 library as well as Vega powered by Altair with Python. "+
+    "This project was created for the course Data Visualization for Policy Analysis at UChicago.",
     render: () => {
         if (!select("#chart svg").empty()){
             select("#chart svg").remove()
@@ -134,7 +132,10 @@ const mySlides = [
     "had hope that the October Revolution (pictured on the right) would bring about meaningful change in a country plagued by a corrupt political elite in power for many decades and " +
     "only able to deliver to their constituents via clientelism based on religious confession. \nFollowing the resignation of the government and the failure of all subsequent "+
     "iterations to deliver on promises of reform many question if change is possible. With the arrival of the Covid-19 pandemic and the ensuing public health and economic damage," + 
-    " and the disastrous Beirut Port explosion, Lebanon is facing its worst crisis as a country since the civil war of 1975-1990. ",
+    " and the disastrous Beirut Port explosion, Lebanon is facing its worst crisis as a country since the civil war of 1975-1990. " +
+    "\n\nMy motivation for undertaking this project was both the sense of "+
+    "urgency and powerlessness to make a difference in a country I hold dear. I hope to leverage my 'data skills' to tell stories of people caught up in" +
+    " conflicts and crises to give them a voice.",
     render: () => {
         if (!select("#chart canvas").empty()){
         select("#chart canvas").remove()
