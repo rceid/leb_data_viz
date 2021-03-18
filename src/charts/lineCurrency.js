@@ -60,14 +60,14 @@ export default function(data) {
     
 
     let x = scaleTime()
-      .domain([new Date("11/15/2018") , new Date("3/15/2021") ]) 
+      .domain([new Date("11/15/2018") , new Date("4/15/2021") ]) 
       .range([0, width])
 
       select(".line-chart .x-axis")
         .call(axisBottom(x));
 
     let y = scaleLinear()
-      .domain([0, 10000])
+      .domain([0, 13000])
       .range([height, 0]);
 
     select(".line-chart .y-axis")
