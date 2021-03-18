@@ -2,6 +2,18 @@ html {
     height: 100%;
 }
 
+@media (max-width: 900px){
+    html {
+        height: 120%;
+    }
+}
+
+@media (max-width: 600px){
+    html {
+        height: 145%;
+    }
+}
+
 body {
     font-family: "Garamond";
     margin: 0;
@@ -10,7 +22,7 @@ body {
 }
 
 #app{
-    background-color:rgb(165, 164, 164, 0.65);
+    background-color:rgb(165, 164, 164, 0.6);
     height:100%;
 }
 
@@ -25,6 +37,16 @@ h2 {
     margin: 3%;
     margin-top:2%;
 }
+
+#narrow {
+    display:none;
+}
+@media (max-width: 950px){
+    #narrow {
+        display:block;
+    }
+}
+
 
 .flex {
     display: flex;
@@ -49,7 +71,15 @@ h2 {
     background-color:rgb(56, 158, 170, .65);
     width: 35%;
     min-width: 35%;
-    min-height: 400px
+    min-height: 400px;
+    border-style: outset;
+    position:relative; 
+}
+
+@media (max-width: 900px){
+    #text{
+        width:45%;
+    }
 }
 
 #chart{
@@ -61,10 +91,11 @@ h2 {
     background-color: white;
 }
 
-#source {
-    font-size: x-small;
-    margin: 0;
+
+#chart svg, #chart canvas, #chart img {
+    border-style: outset;
 }
+
 
 #slideshow{
     margin-top: 2%;
@@ -78,6 +109,14 @@ h2 {
 
 #buttons{
     justify-content: center;
+}
+
+#source {
+    position:absolute; 
+    bottom:0;
+    font-size: small;
+    margin: 0;
+    margin-left: 3%;
 }
 
 #back {

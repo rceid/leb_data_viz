@@ -16,9 +16,10 @@ const mySlides = [
     {title:"Intro",
     content:"In this slideshow I will be exploring Lebanese economic crisis and ensuing state of food insecurity"
     +" using modern data visualizations. \n\nData sources include World Food Programme's datasets for commodity prices, "+
-    "Banque du Liban for the Lebanese currency official peg to the dollar, and lirarate.com, an unofficial website reporting the "+
-    "\"black market\" rate for the local currency. \n\nThis project was created using Javascript's d3 library, as well as Vega "+
-    "powered by Altair with Python. This project was created for the course Data Visualization for Policy Analysis at UChicago.",
+    "Banque du Liban (the Central Bank of Lebanon) for the Lebanese currency's official peg to the dollar, and lirarate.com, an unofficial website reporting the "+
+    "\"black market\" rate for the local currency used by many Lebanese. \n\nThis project was created using Javascript's d3 library,"+
+    " as well as Vega powered by Altair with Python. This project was created for the course Data Visualization for Policy Analysis at UChicago.",
+    source:"",
     render: () => {
         if (!select("#chart svg").empty()){
             select("#chart svg").remove()
@@ -33,10 +34,12 @@ const mySlides = [
     }},
     {title:"Devaluation of the Lebanese Lira",
     content: "The crux of the current economic crisis lies with the loss of value of the local currency, the Lebanese Lira (or Pound, LBP)."+
-    "\nWhile it has been pegged to the dollar at ~1500 Lira since 1997, a black market exchange rate began emerging mid-2019, where our line chart has stopped."  +
+    "\nWhile it has been pegged to the dollar at ~1500 Lira since 1997, a black market exchange rate began emerging mid-2019, where our line chart is stopped."  +
+    "\n\nAt this time, end October 2019, banks closed for two weeks and prohibited the withdraw of dollars to prevent bank runs, adding to the pressure on the currency. "+
     "\n\nThe divergence between the official and unofficial rates coincided with general political unrest and popular resistance against the corrupt ruling class, "+
     "dubbed the October Revolution.\n\n The momentum of this movement has continued to the present day and has lead to the resignation of three different Prime Ministers, yet" +
     " popular reforms have yet to be put in place.",
+    source:"sources: Banque du Liban and www.lirarate.com",
     render: (data) => {
         let cutoffDate  = new Date("10/15/2019")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -48,6 +51,7 @@ const mySlides = [
     "\n\nThe currency had already begun its dangerous decline and the gulf between the unofficial and official rate only grew. The Lebanese economy, already under pressure " +
     "from ongoing, country-wide protests and changing governments was now facing an enormous stress test in the form of the novel virus. The line chart is stopped at March " +
     "2020, the month of the first lockdown.",
+    source:"sources: Banque du Liban and www.lirarate.com",
     render: (data) => {
         let cutoffDate  = new Date("3/15/2020")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -59,6 +63,7 @@ const mySlides = [
     "proportions rocked the capital's port. \nIn its wake, 210 people were killed, 7,500 were injured, and an estimated 300,000 were left homeless. "+
     "\n\nAlthough the senseless destruction was caused by stockpiles of ammonium nitrate that Lebanese Customs had negligently left in port warehouses for " + 
     "several years, no parties have been brought to justice. The country would now have to face the uncertainty of a partly destroyed capital and weakening currency. ", 
+    source:"sources: Banque du Liban and www.lirarate.com",
     render: (data) => {
         let cutoffDate  = new Date("08/15/2020")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -70,6 +75,7 @@ const mySlides = [
     " \nAccording to a World Food Programme survey administered following the Covid-19 outbreak and subsequent lockdown measures, 49% of Lebanese respondents are"+
     " worried about having enough to eat. \n\nThe Lira's decline, coupled with skyrocketing food prices, which we explore in the next slides, has led to widespread"+
     " poverty, hunger, and desperation, unseen since the Civil War of 1975-90.",
+    source:"sources: Banque du Liban and www.lirarate.com",
     render: (data) => {
         let cutoffDate  = new Date("03/15/2021")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -85,6 +91,7 @@ const mySlides = [
     "of the population, many lower-income families have decreased their consumption of food, gas, and "+
     "electricty to reduce expenditures. Middle income families, while also rationing their consumption of utilities, have"+
     " adapted by removing chicken and meat from their diets and opting for less expensive, locally-grown foods.", 
+    source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
         vegaEmbed('#chart', DumbBell, {actions: false})
     }},
@@ -95,6 +102,7 @@ const mySlides = [
     " available and recorded. Each dot is the average price change of the good among the region's countries. " + 
     "\nThe Middle East and North Africa region does stand out as a volatile region for prices compared to the other five." +
     "We will explore in the next slide how Lebanon fits into the regional picture.",
+    source:"source: World Food Programme Commodity Prices for Beneficiary Countries, 2020",
     render: () => {
         vegaEmbed('#chart', BeeSwarmRegion, {actions: false, renderer:'svg'})
     }},
@@ -107,7 +115,8 @@ const mySlides = [
     " \n\nLebanon must take action to prevent the onset of an even worse food crisis. Many citizens "+
     "have taken matters into their own hands and begun growing and purchasing local food, as the "+
     "devalued Lira will not go far in purchasing imported goods. \n\nA meaningful shift to local consumption" +
-    " will be a radical step for this country that imports food, and many other commodities, on a massive scale. ",
+    " will be a radical step for this country that imports food, and many other commodities, on a massive scale.\n\n",
+    source:"source: World Food Programme Commodity Prices for Beneficiary Countries, 2020",
     render: () => {
         vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
     }},
@@ -118,6 +127,7 @@ const mySlides = [
     "almost $90. \n\nAs previously mentioned, Lebanese people may adjust their habits, consuming less or substituting "+
     "goods, but this financial pressure has fundamentally altered everyday life and many feel powerless to do anything "+
     "about it.",
+    source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
         vegaEmbed('#chart', areaChartUSD, {actions: false})
     }},
@@ -127,6 +137,7 @@ const mySlides = [
     " facing. \n\nThe red line represents the highest price that the basket attained in nominal price on the previous slide. Prices are "+
     "crushingly high, yet people need to eat. Families are faced with impossible decisions of whether to save their money or purchase a little more lentils, "+
     "or rice, or bread.",
+    source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
         vegaEmbed('#chart', areaChartLollar, {actions: false})
     }},
@@ -139,6 +150,7 @@ const mySlides = [
     "\n\nMy motivation for undertaking this project was both the sense of "+
     "urgency and powerlessness to make a difference in a country I hold dear. I hope to leverage my 'data skills' to tell stories of people caught up in" +
     " conflicts and crises to give them a voice.",
+    source:'Image source: Nabil Ismaili, https://www.wilpf.org',
     render: () => {
         if (!select("#chart canvas").empty()){
         select("#chart canvas").remove()
@@ -148,10 +160,6 @@ const mySlides = [
         .attr("src", "https://www.wilpf.org/wp-content/uploads/2019/12/1-Nabil_Ismail_Photography-1536x949.jpg")
         .attr('width', '100%')
         .attr('height', 'auto')
-        select('#chart')
-        .append('p')
-        .text('source: Nabil Ismaili, https://www.wilpf.org')
-        .attr('id', 'source')
         }
 }}
 ];
@@ -160,6 +168,7 @@ function main (data){
     let slideIdx = 0;
     const slideTitle = select("#text h2");
     const slideContent = select("#text p");
+    const source = select("#text #source")
     const updateState = newIdx => {
         slideIdx = newIdx;
         renderSlide();
@@ -179,6 +188,7 @@ function main (data){
         currentSlide.render(data);
         slideTitle.text(currentSlide.title);
         slideContent.text(currentSlide.content);
+        source.text(currentSlide.source)
     }
     renderSlide();
 }

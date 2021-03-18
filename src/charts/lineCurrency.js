@@ -57,7 +57,6 @@ export default function(data) {
     }
     
     let svg = select("svg .line-chart")
-    
 
     let x = scaleTime()
       .domain([new Date("11/15/2018") , new Date("4/15/2021") ]) 
