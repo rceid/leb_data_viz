@@ -12,12 +12,19 @@ import lineChart from './charts/lineCurrency.js'
 
 csv("./data/fx_rate.csv").then(main)
 
+// Resolves once the image has loaded (or failed), so the fade-in shows it whole
+const imageLoaded = img => new Promise(resolve => {
+    if (img.complete) return resolve()
+    img.addEventListener('load', resolve, {once: true})
+    img.addEventListener('error', resolve, {once: true})
+})
+
 const mySlides = [
     {title:"Intro",
     content:`In this slideshow I will be exploring Lebanese economic crisis and ensuing state of food insecurity`
     +` using modern data visualizations. \n\nData sources include World Food Programme's datasets for commodity prices, `+
     `Banque du Liban (the Central Bank of Lebanon) for the Lebanese currency's official peg to the dollar, and lirarate.com, an unofficial website reporting the `+
-    `\"black market\" rate for the local currency used by many Lebanese. \n\nThis project was created using Javascript's d3 library,`+
+    `"black market" rate for the local currency used by many Lebanese. \n\nThis project was created using Javascript's d3 library,`+
     ` as well as Vega powered by Altair with Python. This project was created for the course Data Visualization for Policy Analysis at UChicago.`,
     source:"WFP Dataset: https://data.humdata.org/dataset/wfp-food-prices",
     render: () => {
@@ -27,8 +34,7 @@ const mySlides = [
         .attr("src", "./data/images/charts_intro.png")
         .attr('width', '80%')
         .attr('height', 'auto')
-        // Resolves once the image is ready, so the fade-in shows it whole
-        return img.node().decode().catch(() => {})
+        return imageLoaded(img.node())
     }},
     {title:"Devaluation of the Lebanese Lira",
     content: "The crux of the current economic crisis lies with the loss of value of the local currency, the Lebanese Lira."+
@@ -166,7 +172,7 @@ const mySlides = [
         .attr("src", "./data/images/conclusion_nabil_ismail.jpg")
         .attr('width', '100%')
         .attr('height', 'auto')
-        return img.node().decode().catch(() => {})
+        return imageLoaded(img.node())
 }}
 ];
 

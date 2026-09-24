@@ -15,14 +15,6 @@ module.exports = {
         enforce: 'pre',
         use: ['source-map-loader'],
       },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: [/node_modules/],
-        options: {
-          presets: ['es2017'],
-        },
-      },
     ],
   },
   output: {
@@ -30,6 +22,16 @@ module.exports = {
     path: path.join(__dirname, './'),
     sourceMapFilename: '[name].js.map',
   },
+  // `npm start` serves index.html, data/ and src/main.css from the repo root,
+  // with bundle.js built in memory
+  devServer: {
+    static: {
+      directory: __dirname,
+      watch: {ignored: ['**/node_modules/**', '**/.git/**']},
+    },
+    port: 8080,
+  },
   plugins: [],
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // eslint-disable-line
+  // `npm run build` passes --mode production
+  mode: 'development',
 };

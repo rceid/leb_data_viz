@@ -42,7 +42,7 @@ export default function(data) {
         select("svg .line-chart").append("g")
         .attr("class", "y-axis")
         // add legend once
-        Array(["20", "45", "#8a857c"], ["20", "30", "#0f6b45"]).map((val, idx) => {
+        Array(["20", "45", "#8a857c"], ["20", "30", "#0f6b45"]).map((val) => {
           select("svg .line-chart")
           .append("rect")
           .attr("height", 5)
@@ -55,7 +55,7 @@ export default function(data) {
         Array(['20', '-25', 'Dollar-Lira Foreign Exchange Rate', 'large', 'bold'], 
           ['80', '-10', "November 2018 - Present", "small", ""],
           ['39', '50', "Official Rate", 'small', ''],
-          ['39', '35', 'Unofficial Rate', 'small', '']).map((val, _) => {
+          ['39', '35', 'Unofficial Rate', 'small', '']).map((val) => {
             select("svg .line-chart")
             .append("text")
             .attr("x", val[0])
