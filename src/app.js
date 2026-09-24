@@ -21,16 +21,12 @@ const mySlides = [
     ` as well as Vega powered by Altair with Python. This project was created for the course Data Visualization for Policy Analysis at UChicago.`,
     source:"WFP Dataset: https://data.humdata.org/dataset/wfp-food-prices",
     render: () => {
-        if (!select("#chart svg").empty()){
-            select("#chart svg").remove()
-           }
-        if (select("#chart img").empty()){
+        select("#chart").selectAll("*").remove()
         select("#chart")
         .append("img")
         .attr("src", "./data/images/charts_intro.png")
         .attr('width', '80%')
         .attr('height', 'auto')
-        }
     }},
     {title:"Devaluation of the Lebanese Lira",
     content: "The crux of the current economic crisis lies with the loss of value of the local currency, the Lebanese Lira."+
@@ -40,6 +36,7 @@ const mySlides = [
     "dubbed the October Revolution.\n\n The momentum of this movement has continued to the present day and has lead to the resignation of three different Prime Ministers, yet" +
     " popular reforms have yet to be put in place.",
     source:"sources: Banque du Liban and www.lirarate.com",
+    sharedChart: "exchange-rate",
     render: (data) => {
         let cutoffDate  = new Date("10/15/2019")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -52,6 +49,7 @@ const mySlides = [
     "from ongoing, country-wide protests and changing governments was now facing an enormous stress test in the form of the novel virus. The line chart is stopped at March " +
     "2020, the month of the first lockdown.",
     source:"sources: Banque du Liban and www.lirarate.com",
+    sharedChart: "exchange-rate",
     render: (data) => {
         let cutoffDate  = new Date("3/15/2020")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -64,6 +62,7 @@ const mySlides = [
     "\n\nAlthough the senseless destruction was caused by stockpiles of ammonium nitrate that Lebanese Customs had negligently left in port warehouses for " + 
     "several years, no parties have been brought to justice. The country would now have to face the uncertainty of a partly destroyed capital and weakening currency. ", 
     source:"sources: Banque du Liban and www.lirarate.com",
+    sharedChart: "exchange-rate",
     render: (data) => {
         let cutoffDate  = new Date("08/15/2020")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -76,6 +75,7 @@ const mySlides = [
     " worried about having enough to eat. \n\nThe Lira's decline, coupled with skyrocketing food prices, which we will explore in the next slides, has led to widespread"+
     " poverty, hunger, and desperation, unseen since the Civil War of 1975-90.",
     source:"sources: Banque du Liban and www.lirarate.com",
+    sharedChart: "exchange-rate",
     render: (data) => {
         let cutoffDate  = new Date("03/15/2021")
         let filteredData = data.filter(( { date } ) => new Date(date)  <= cutoffDate)
@@ -93,7 +93,7 @@ const mySlides = [
     " adapted by removing chicken and meat from their diets and opting for less expensive, locally-grown foods.", 
     source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
-        vegaEmbed('#chart', DumbBell, {actions: false})
+        return vegaEmbed('#chart', DumbBell, {actions: false})
     }},
     {title:"Commodity Price Changes in 2020 by Region",
     content: "The interactive Bee Swarm plot show commodities and their " +
@@ -104,7 +104,7 @@ const mySlides = [
     "We will explore in the next slide how Lebanon fits into the regional picture.",
     source:"source: World Food Programme Commodity Prices for Beneficiary Countries, 2020",
     render: () => {
-        vegaEmbed('#chart', BeeSwarmRegion, {actions: false, renderer:'svg'})
+        return vegaEmbed('#chart', BeeSwarmRegion, {actions: false, renderer:'svg'})
     }},
     {title:"2020 Price Changes in the MENA Region",
     content: "This interactive Bee Swarm plot shows prices changes for WFP beneficiary " +
@@ -118,7 +118,7 @@ const mySlides = [
     " will be a radical step for this country that imports food, and many other commodities, on a massive scale.\n\n",
     source:"source: World Food Programme Commodity Prices for Beneficiary Countries, 2020",
     render: () => {
-        vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
+        return vegaEmbed('#chart', BeeSwarmCountry, {actions: false})
     }},
     {title:"Basket of Household Goods",
     content: "Now we take a look at the price of a normal basket of goods with this area chart. "+
@@ -129,7 +129,7 @@ const mySlides = [
     "about it.",
     source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
-        vegaEmbed('#chart', areaChartUSD, {actions: false})
+        return vegaEmbed('#chart', areaChartUSD, {actions: false})
     }},
     {title:"Real Prices for Basket of Goods",
     content: "This chart shows the real prices of the same commodities (in Lollar, concept explained below), in the place of nominal prices in the previous slide's chart."+
@@ -143,7 +143,7 @@ const mySlides = [
     " has fallen on the black market, about 5 times by November 2020 (7,800 Lira per dollar on the black market vs. the official rate of ~1,507).",
     source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
-        vegaEmbed('#chart', areaChartLollar, {actions: false})
+        return vegaEmbed('#chart', areaChartLollar, {actions: false})
     }},
     {title:"Conclusion",
     content:"Many fear that Lebanon is headed for collapse, and the economic crisis will be the primary driver leading it into the depths of despair. Many "+ 
@@ -156,20 +156,24 @@ const mySlides = [
     " conflicts and crises to give them a voice.",
     source:'Image source: Nabil Ismaili, https://www.wilpf.org',
     render: () => {
-        if (!select("#chart canvas").empty()){
-        select("#chart canvas").remove()
-        select("#chart form").remove()
+        select("#chart").selectAll("*").remove()
         select("#chart")
         .append("img")
         .attr("src", "https://www.wilpf.org/wp-content/uploads/2019/12/1-Nabil_Ismail_Photography-1536x949.jpg")
         .attr('width', '100%')
         .attr('height', 'auto')
-        }
 }}
 ];
 
+// Keep in sync with the #chart fade transition in main.css
+const fadeMs = 300;
+
 function main (data){
     let slideIdx = 0;
+    // Slide whose chart is on screen; lags slideIdx while a fade is in progress
+    let shownIdx = null;
+    // Bumped on every navigation so a stale fade never finishes over a newer one
+    let swapToken = 0;
     const slideTitle = select("#text h2");
     const slideContent = select("#slide-content");
     const source = select("#source")
@@ -195,10 +199,35 @@ function main (data){
         backButton.property("disabled", slideIdx === 0)
         nextButton.property("disabled", slideIdx === mySlides.length - 1)
         const currentSlide = mySlides[slideIdx];
-        currentSlide.render(data);
+        swapChart(slideIdx);
         slideTitle.text(currentSlide.title);
         slideContent.text(currentSlide.content);
         source.text(currentSlide.source)
+    }
+
+    function swapChart(targetIdx) {
+        const token = ++swapToken;
+        const target = mySlides[targetIdx];
+        const shown = shownIdx === null ? null : mySlides[shownIdx];
+        // First load, or moving within the exchange-rate slides: no fade
+        if (!shown || (shown.sharedChart && shown.sharedChart === target.sharedChart)) {
+            shownIdx = targetIdx;
+            target.render(data);
+            select("#chart").classed("fading", false);
+            return;
+        }
+        select("#chart").classed("fading", true);
+        setTimeout(() => {
+            if (token !== swapToken) return;
+            shownIdx = targetIdx;
+            Promise.resolve(target.render(data)).then(() => {
+                if (token !== swapToken) return;
+                // The exchange-rate chart builds a fresh #chart, so hide it first
+                const chart = select("#chart").classed("fading", true);
+                chart.node().getBoundingClientRect();
+                chart.classed("fading", false);
+            });
+        }, fadeMs);
     }
     renderSlide();
 }

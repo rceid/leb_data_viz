@@ -153,6 +153,15 @@ h1 {
     overflow-x: auto;
 }
 
+/* Chart swaps fade out and back in; duration matches fadeMs in app.js */
+#chart > * {
+    transition: opacity 0.3s ease;
+}
+
+#chart.fading > * {
+    opacity: 0;
+}
+
 #chart img {
     display: block;
     width: 100%;
