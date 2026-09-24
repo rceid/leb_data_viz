@@ -22,11 +22,13 @@ const mySlides = [
     source:"WFP Dataset: https://data.humdata.org/dataset/wfp-food-prices",
     render: () => {
         select("#chart").selectAll("*").remove()
-        select("#chart")
+        const img = select("#chart")
         .append("img")
         .attr("src", "./data/images/charts_intro.png")
         .attr('width', '80%')
         .attr('height', 'auto')
+        // Resolves once the image is ready, so the fade-in shows it whole
+        return img.node().decode().catch(() => {})
     }},
     {title:"Devaluation of the Lebanese Lira",
     content: "The crux of the current economic crisis lies with the loss of value of the local currency, the Lebanese Lira."+
@@ -126,7 +128,9 @@ const mySlides = [
     "in (nominal) price between November 2018 and November 2020. A trip to the grocery store that once cost $40 now costs "+
     "almost $90. \n\nAs previously mentioned, Lebanese people may adjust their habits, consuming less or substituting "+
     "goods, but this financial pressure has fundamentally altered everyday life and many feel powerless to do anything "+
-    "about it.",
+    "about it. \n\nThe basket of goods is built from World Food Programme price data: one of each of 15 staples, in the unit WFP reports"+
+    " it (1 kg for most items, 30 eggs, a 10 kg cooking gas cylinder), priced at the average across Lebanese markets each month."+
+    " Hover over the chart to see each item's quantity and price.",
     source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
         return vegaEmbed('#chart', areaChartUSD, {actions: false})
@@ -134,7 +138,7 @@ const mySlides = [
     {title:"Real Prices for Basket of Goods",
     content: "This chart shows the real prices of the same commodities (in Lollar, concept explained below), in the place of nominal prices in the previous slide's chart."+
     " This chart captures the real financial pressure that the average Lebanese person paid wages in the constantly devaluing Lira is currently"+
-    " facing and their massive loss of purchasing power over two years. \n\nThe red line represents the highest price that the basket attained in"+
+    " facing and their massive loss of purchasing power over two years. \n\nThe black line represents the highest price that the basket attained in"+
     " the previous slide's graph. Prices are crushingly high, yet people need to eat. Families are faced with impossible decisions of whether to "+
     "save their money or purchase a little more lentils, or rice, or bread. \n\nLollar is a portmanteau of Lira and Dollar. It is a US"+
     " dollar that's stuck inside a Lebanese bank: on paper it's a dollar, but it can't be transferred abroad, and banks only let depositors"+
@@ -157,11 +161,12 @@ const mySlides = [
     source:'Image source: Nabil Ismaili, https://www.wilpf.org',
     render: () => {
         select("#chart").selectAll("*").remove()
-        select("#chart")
+        const img = select("#chart")
         .append("img")
-        .attr("src", "https://www.wilpf.org/wp-content/uploads/2019/12/1-Nabil_Ismail_Photography-1536x949.jpg")
+        .attr("src", "./data/images/conclusion_nabil_ismail.jpg")
         .attr('width', '100%')
         .attr('height', 'auto')
+        return img.node().decode().catch(() => {})
 }}
 ];
 

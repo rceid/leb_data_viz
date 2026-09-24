@@ -1,27 +1,34 @@
+import basketHover from './basketHover.js';
+
 export default {
     "config": {
       "view": {"continuousWidth": 400, "continuousHeight": 300},
       "axisX": {"labelAngle": -45}
     },
     "data": {"name": "data-967d1e792075c9420ff4629f40384a4e"},
-    "mark": "area",
-    "encoding": {
-      "color": {
-        "type": "nominal",
-        "field": "cmname",
-        "legend": {"title": "Commodities"},
-        "scale": {"scheme": "tableau20"}
+    "layer": [
+      {
+        "mark": "area",
+        "encoding": {
+          "color": {
+            "type": "nominal",
+            "field": "cmname",
+            "legend": {"title": "Commodities"},
+            "scale": {"scheme": "tableau20"}
+          },
+          "x": {
+            "type": "ordinal",
+            "field": "date",
+            "timeUnit": "yearmonth",
+            "title": ""
+          },
+          "y": {"type": "quantitative", 
+          "field": "Price, USD",
+            "title":""}
+        }
       },
-      "x": {
-        "type": "ordinal",
-        "field": "date",
-        "timeUnit": "yearmonth",
-        "title": ""
-      },
-      "y": {"type": "quantitative", 
-      "field": "Price, USD",
-        "title":""}
-    },
+      basketHover("data-967d1e792075c9420ff4629f40384a4e", "Price, USD", "Price (USD)", "$,.2f")
+    ],
     "height": 300,
     "title": {"text": ["Household Commodity Prices, USD"], "fontSize": 15},
     "width": 295,

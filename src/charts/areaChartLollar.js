@@ -1,3 +1,5 @@
+import basketHover from './basketHover.js';
+
 export default {
     "config": {"view": {"continuousWidth": 400, "continuousHeight": 300},
     "axisX": {"labelAngle": -45}},
@@ -26,7 +28,7 @@ export default {
       },
       {
         "data": {"name": "data-38ae4cf486f5687ce474155bc968decd"},
-        "mark": {"type": "line", "color": "#EF3340"},
+        "mark": {"type": "line", "color": "black", "strokeWidth": 1},
         "encoding": {
           "x": {
             "type": "ordinal",
@@ -54,7 +56,8 @@ export default {
           "y": {"type": "quantitative", "field": "peak", "title": ""},
           "text": {"value": "Highest USD basket price"}
         }
-      }
+      },
+      basketHover("data-967d1e792075c9420ff4629f40384a4e", "Price, Lollar", "Price (Lollar)", ",.2f")
     ],
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
     "datasets": {
