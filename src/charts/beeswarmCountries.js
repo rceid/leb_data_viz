@@ -9,21 +9,19 @@ export default {
       "color": {
         "type": "nominal",
         "field": "Country",
-        "legend": {
-          'orient':'bottom',
-          'columns':2
-        },
+        // Each swarm is labeled directly underneath (column header below)
+        "legend": null,
         "scale": {"scheme": "category10"}
       },
       "column": {
         "type": "nominal",
         "field": "Country",
         "header": {
-          "labelFontSize": 0,
+          "labelFontSize": 11,
           "labelOrient": "bottom",
           "titleFontSize": 0,
           "titleOrient": "top",
-          "labelPadding":3
+          "labelPadding": 8
         },
         "title": ""
       },

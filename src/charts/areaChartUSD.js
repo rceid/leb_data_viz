@@ -13,7 +13,7 @@ export default {
           "color": {
             "type": "nominal",
             "field": "cmname",
-            "legend": {"title": "Commodities"},
+            "legend": null,
             "scale": {"scheme": "tableau20"}
           },
           "x": {
@@ -30,8 +30,8 @@ export default {
       basketHover("data-967d1e792075c9420ff4629f40384a4e", "Price, USD", "Price (USD)", "$,.2f")
     ],
     "height": 300,
-    "title": {"text": ["Household Commodity Prices, USD"], "fontSize": 15},
-    "width": 295,
+    "title": {"text": ["Household Commodity Prices, USD"], "fontSize": 15, "subtitle": ["Hover over a band to see the commodity, its quantity and price"], "subtitleFontSize": 11},
+    "width": 470,
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
     "datasets": {
       "data-967d1e792075c9420ff4629f40384a4e": [

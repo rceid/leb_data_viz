@@ -11,7 +11,7 @@ export default {
           "color": {
             "type": "nominal",
             "field": "cmname",
-            "legend": {"title": "Commodities"},
+            "legend": null,
             "scale": {"scheme": "tableau20"}
           },
           "x": {
@@ -23,8 +23,8 @@ export default {
           "y": {"type": "quantitative", "field": "Price, Lollar", "title": ""}
         },
         "height": 300,
-        "title": {"text": ["Household Commodity Prices, Lollar"], "fontSize": 15},
-        "width": 295
+        "title": {"text": ["Household Commodity Prices, Lollar"], "fontSize": 15, "subtitle": ["Hover over a band to see the commodity, its quantity and price"], "subtitleFontSize": 11},
+        "width": 470
       },
       {
         "data": {"name": "data-38ae4cf486f5687ce474155bc968decd"},
