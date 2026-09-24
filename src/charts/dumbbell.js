@@ -21,7 +21,7 @@ export default {
             "type": "nominal",
             "field": "Year",
             "legend": {"title": ""},
-            "scale": {"domain": ["2018", "2020"], "range": ["#389eaa", "#0e7534"]}
+            "scale": {"domain": ["2018", "2020"], "range": ["#8a857c", "#0f6b45"]}
           },
           "x": {"type": "quantitative", "field": "price"},
           "y": {

@@ -2,39 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lebanon - Food Prices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
     <link rel="stylesheet" href="src/main.css" />
   </head>
   <body>
-    <div id="app" class="flex-down">
-      <div id='header'></div>
-      <div id='app-title' class='flex-down'>
+    <div id="flag" aria-hidden="true"></div>
+    <div id="app">
+      <header id="app-title">
+        <p class="kicker">A data story</p>
         <h1>Food Insecurity in Lebanon</h1>
-        <h3><em>How did we get here?</em></h3>
-      </div>
-      <div id='slideshow' class='flex-down'>
-        <div id='contents' class='flex'>
-        <div id='text'>
-          <h2></h2>
-          <p id="slide-content"></p>
-          <br id='narrow'>
-          <br id='narrow'>
-          <em><p id="source"></p></em>
+        <p class="dek">How did we get here?</p>
+      </header>
+      <main id="slideshow">
+        <div id="contents">
+          <article id="text">
+            <h2></h2>
+            <p id="slide-content"></p>
+            <p id="source"></p>
+          </article>
+          <div id="chart"></div>
         </div>
-        <div id="chart"></div>
-      </div>
-      <br>
-        <div class="flex" id='buttons'>
-          <button id="back">Back</button>
-          <button id="next">Next</button>
-        </div>
-        <div class='flex prog-container'>
-          <progress id='p-bar' max="100" value="0"></progress>
-        </div>
-      </div>
+      </main>
     </div>
+    <nav id="nav" aria-label="Slides">
+      <div class="nav-inner">
+        <button id="back" type="button">&larr; Back</button>
+        <div class="prog-container">
+          <progress id="p-bar" max="100" value="0"></progress>
+          <span id="slide-count"></span>
+        </div>
+        <button id="next" type="button">Next &rarr;</button>
       </div>
-    </div>
+    </nav>
     <script src="bundle.js"></script>
   </body>
 </html>

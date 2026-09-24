@@ -36,6 +36,24 @@ export default {
           },
           "y": {"type": "quantitative", "field": " ", "title": ""}
         }
+      },
+      {
+        "data": {"name": "data-38ae4cf486f5687ce474155bc968decd"},
+        "transform": [
+          {"filter": "year(datum.date) == 2018 && month(datum.date) == 10"},
+          {"aggregate": [{"op": "max", "field": " ", "as": "peak"}], "groupby": ["date"]}
+        ],
+        "mark": {"type": "text", "align": "left", "baseline": "bottom", "dy": -4, "fontStyle": "italic"},
+        "encoding": {
+          "x": {
+            "type": "ordinal",
+            "field": "date",
+            "timeUnit": "yearmonth",
+            "title": ""
+          },
+          "y": {"type": "quantitative", "field": "peak", "title": ""},
+          "text": {"value": "Highest USD basket price"}
+        }
       }
     ],
     "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",

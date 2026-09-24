@@ -132,11 +132,15 @@ const mySlides = [
         vegaEmbed('#chart', areaChartUSD, {actions: false})
     }},
     {title:"Real Prices for Basket of Goods",
-    content: "This chart shows the real prices of the same commodities, in the place of nominal prices in the previous slide's chart."+
+    content: "This chart shows the real prices of the same commodities (in Lollar, concept explained below), in the place of nominal prices in the previous slide's chart."+
     " This chart captures the real financial pressure that the average Lebanese person paid wages in the constantly devaluing Lira is currently"+
     " facing and their massive loss of purchasing power over two years. \n\nThe red line represents the highest price that the basket attained in"+
     " the previous slide's graph. Prices are crushingly high, yet people need to eat. Families are faced with impossible decisions of whether to "+
-    "save their money or purchase a little more lentils, or rice, or bread.",
+    "save their money or purchase a little more lentils, or rice, or bread. \n\nLollar is a portmanteau of Lira and Dollar. It is a US"+
+    " dollar that's stuck inside a Lebanese bank: on paper it's a dollar, but it can't be transferred abroad, and banks only let depositors"+
+    " withdraw a limited amount each month, mostly paid out in Lira at a rate far below the market rate. That makes it worth much less than"+
+    " a real dollar. In this chart, each item's price in dollars at the official rate is multiplied by how far the Lira"+
+    " has fallen on the black market, about 5 times by November 2020 (7,800 Lira per dollar on the black market vs. the official rate of ~1,507).",
     source:"source: World Food Programme Commodity Prices for Lebanon, 2018-2020",
     render: () => {
         vegaEmbed('#chart', areaChartLollar, {actions: false})
@@ -167,23 +171,29 @@ const mySlides = [
 function main (data){
     let slideIdx = 0;
     const slideTitle = select("#text h2");
-    const slideContent = select("#text p");
-    const source = select("#text #source")
+    const slideContent = select("#slide-content");
+    const source = select("#source")
+    const slideCount = select("#slide-count")
+    const backButton = select("#back")
+    const nextButton = select("#next")
     const updateState = newIdx => {
         slideIdx = newIdx;
         renderSlide();
     }
     let progressBar = document.body.querySelector("#p-bar")
     
-    select("#buttons #back").on('click', () =>
+    backButton.on('click', () =>
         updateState(slideIdx ? slideIdx - 1 : slideIdx),
     );
     
-    select("#buttons #next").on('click', () =>
+    nextButton.on('click', () =>
         updateState(slideIdx === mySlides.length - 1 ? slideIdx : slideIdx + 1),);
 
     function renderSlide() {
         progressBar.value = ((slideIdx + 1)/ mySlides.length) * 100
+        slideCount.text(`${slideIdx + 1} / ${mySlides.length}`)
+        backButton.property("disabled", slideIdx === 0)
+        nextButton.property("disabled", slideIdx === mySlides.length - 1)
         const currentSlide = mySlides[slideIdx];
         currentSlide.render(data);
         slideTitle.text(currentSlide.title);
